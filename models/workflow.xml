@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Schema xmlns="http://www.midgard-project.org/repligard/1.4">
+    <type name="midgardmvc_helper_workflow_execution" table="midgardmvc_helper_workflow_execution">
+        <property name="id" type="unsigned integer" primaryfield="id">
+            <description>Local non-replication-safe database identifier</description>
+        </property>
+        <property name="nextthread" type="unsigned integer" />
+        <property name="parent" type="unsigned integer" link="midgardmvc_helper_workflow_execution:id" upfield="parent" />
+        <property name="started" type="datetime" />
+        <property name="suspended" type="datetime" />
+        <property name="workflow" type="unsigned integer" />
+        <property name="threads" type="text" />
+        <property name="variables" type="text" />
+        <property name="waitingfor" type="text" />
+    </type>
+
+    <type name="midgardmvc_helper_workflow_execution_state" table="midgardmvc_helper_workflow_execution_state" parent="midgardmvc_helper_workflow_execution">
+        <property name="id" type="unsigned integer" primaryfield="id">
+            <description>Local non-replication-safe database identifier</description>
+        </property>
+        <property name="execution" type="unsigned integer" link="midgardmvc_helper_workflow_execution:id" parentfield="execution" />
+        <property name="node" type="unsigned integer" />
+        <property name="thread" type="unsigned integer" />
+        <property name="activatedfrom" type="text" />
+        <property name="state" type="text" />
+    </type>
+</Schema>

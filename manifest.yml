@@ -1,0 +1,8 @@
+authors:
+    bergie:
+        name: Henri Bergius
+        email: henri.bergius@iki.fi
+        url: http://bergie.iki.fi/
+requires_pear:
+    Workflow:
+        channel: components.ez.no
