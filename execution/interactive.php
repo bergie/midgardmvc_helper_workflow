@@ -47,16 +47,16 @@ class midgardmvc_helper_workflow_execution_interactive extends ezcWorkflowExecut
     public function __construct(ezcWorkflow $workflow, $executionId = null)
     {
         if (   $executionId !== null 
-            && !is_int($executionId))
+            && !mgd_is_guid($executionId))
         {
-            throw new ezcWorkflowExecutionException('$executionId must be an integer.');
+            throw new ezcWorkflowExecutionException('$executionId must be a GUID.');
         }
 
         $this->properties['workflow'] = $workflow;
 
-        if (is_int($executionId))
+        if (mgd_is_guid($executionId))
         {
-            $this->loadExecution( $executionId);
+            $this->loadExecution($executionId);
         }
 
         $this->transaction = new midgard_transaction();
@@ -79,6 +79,10 @@ class midgardmvc_helper_workflow_execution_interactive extends ezcWorkflowExecut
             case 'workflow':
             case 'options':
                 return $this->properties[$propertyName];
+            case 'guid':
+                return $this->execution->guid;
+            case 'execution':
+                return $this->execution;
         }
 
         throw new ezcBasePropertyNotFoundException($propertyName);
@@ -245,7 +249,7 @@ class midgardmvc_helper_workflow_execution_interactive extends ezcWorkflowExecut
     /**
      * Load execution state.
      *
-     * @param int $executionId  ID of the execution to load.
+     * @param guid $executionId GUID of the execution to load.
      * @throws ezcWorkflowExecutionException
      */
     protected function loadExecution($executionId)
@@ -253,7 +257,7 @@ class midgardmvc_helper_workflow_execution_interactive extends ezcWorkflowExecut
         $this->execution = new midgardmvc_helper_workflow_execution();
         try
         {
-            $this->execution->get_by_id($executionId);
+            $this->execution->get_by_guid($executionId);
         }
         catch (midgard_error_exception $e)
         {

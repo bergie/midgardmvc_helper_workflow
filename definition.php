@@ -24,7 +24,12 @@ interface midgardmvc_helper_workflow_definition
     public function get();
 
     /**
-     * Run the workflow with a particular object instance
+     * Start the workflow for a particular object instance
      */
-    public function run(midgard_object $object, array $args = null);
+    public function start(midgard_object $object, array $args = null);
+
+    /**
+     * Resume a workflow execution
+     */
+    public function resume($execution_guid, array $args = null);
 }
