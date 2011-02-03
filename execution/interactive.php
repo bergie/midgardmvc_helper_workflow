@@ -29,11 +29,14 @@ class midgardmvc_helper_workflow_execution_interactive extends ezcWorkflowExecut
      *
      * @var array(string=>mixed)
      */
-    protected $properties = array(
+    protected $properties = array
+    (
         'definitionStorage' => null,
         'workflow' => null,
         'options' => null
     );
+
+    private $loaded = false;
 
     /**
      * Construct a new Midgard execution.
@@ -149,7 +152,7 @@ class midgardmvc_helper_workflow_execution_interactive extends ezcWorkflowExecut
         $this->execution->started = new midgard_datetime();
         $this->execution->nextthread = (int) $this->nextThreadId;
         $this->execution->variables = self::serialize($this->variables);
-        $this->execution->waitingfor = self::serialize($this->waitingFor);
+        $this->execution->waitingfor = self::serialize($this->getWaitingFor());
         $this->execution->threads = self::serialize($this->threads);
         $this->execution->create();
     }
@@ -164,7 +167,7 @@ class midgardmvc_helper_workflow_execution_interactive extends ezcWorkflowExecut
         $this->execution->suspended = new midgard_datetime();
         $this->execution->nextthread = (int) $this->nextThreadId;
         $this->execution->variables = self::serialize($this->variables);
-        $this->execution->waitingfor = self::serialize($this->waitingfor);
+        $this->execution->waitingfor = self::serialize($this->getWaitingFor());
         $this->execution->threads = self::serialize($this->threads);
         $this->execution->update();
 
@@ -320,7 +323,6 @@ class midgardmvc_helper_workflow_execution_interactive extends ezcWorkflowExecut
     public static function serialize($var)
     {
         $var = serialize($var);
-
         if (   $var == 'a:0:{}'
             || $var == 'N;')
         {
