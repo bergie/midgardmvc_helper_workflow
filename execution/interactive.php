@@ -155,6 +155,8 @@ class midgardmvc_helper_workflow_execution_interactive extends ezcWorkflowExecut
         $this->execution->waitingfor = self::serialize($this->getWaitingFor());
         $this->execution->threads = self::serialize($this->threads);
         $this->execution->create();
+
+        $this->id = $this->execution->id;
     }
 
     /**
@@ -269,6 +271,7 @@ class midgardmvc_helper_workflow_execution_interactive extends ezcWorkflowExecut
             );
         }
 
+        $this->id = $this->execution->id;
         $this->nextThreadId = $this->execution->nextthread;
 
         $this->threads = self::unserialize($this->execution->threads);
