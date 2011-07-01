@@ -174,9 +174,11 @@ class midgardmvc_helper_workflow_execution_interactive extends ezcWorkflowExecut
         $this->execution->update();
 
         $this->delete_states($this->execution);
-
         foreach ($this->activatedNodes as $node)
         {
+            // Note: for some reason ID gets lost without in_array here
+            in_array($node, $this->workflow->nodes);
+
             $state = new midgardmvc_helper_workflow_execution_state();
             $state->execution = $this->execution->id;
             $state->node = (int) $node->getId();
@@ -295,7 +297,6 @@ class midgardmvc_helper_workflow_execution_interactive extends ezcWorkflowExecut
         foreach ($this->workflow->nodes as $node)
         {
             $nodeId = $node->getId();
-
             if (!isset($active[$nodeId]))
             {
                 continue;
