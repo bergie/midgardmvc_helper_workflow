@@ -19,6 +19,8 @@ class midgardmvc_helper_workflow_utils
                 throw new Exception("Invalid workflow definition {$workflow_name}: {$wf_class} doesn't implement midgardmvc_helper_workflow_definition");
             }
 
+            $wf->workflow = $workflow;
+
             if (!$wf->can_handle($object))
             {
                 continue;
