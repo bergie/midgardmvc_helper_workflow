@@ -30,6 +30,7 @@ class midgardmvc_helper_workflow_utils
             (
                 'label' => $workflow['label'],
                 'provider' => $wf_class,
+                'css' => (array_key_exists('css', $workflow)) ? $workflow['css'] : ''
             );
         }
         return $object_workflows;
