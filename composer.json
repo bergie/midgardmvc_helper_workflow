@@ -1,0 +1,25 @@
+{
+  "name": "midgard/midgardmvc-helper-workflow",
+  "type": "library",
+  "description": "Workflow runner for Midgard MVC",
+  "keywords": ["workflow"],
+  "license": "LGPL",
+  "authors": [
+    {
+      "name": "Henri Bergius",
+      "email": "henri.bergius@iki.fi",
+      "homepage": "http://bergie.iki.fi/"
+    }
+  ],
+  "minimum-stability": "dev",
+  "require": {
+    "php": ">=5.2.0"
+  },
+  "require": {
+    "zetacomponents/workflow": "dev-master",
+    "midgard/midgardmvc-core": "dev-master"
+  },
+  "autoload": {
+    "classmap": ["."]
+  }
+}
